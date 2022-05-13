@@ -1,8 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&family=Quicksand:wght@300&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .form-container {
   display: flex;
   height: 100vh;
   flex-direction: column;
   justify-content: center;
   padding: 30px;
-  /* align-items: flex-start; */
+  align-items: center;
+}
+
+.site-layout-content {
+  min-height: 280px;
+  padding:10px 150px;
+  /* background: #fff; */
+}
+
+#components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.p-3 {
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
 }

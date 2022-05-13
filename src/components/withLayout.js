@@ -5,11 +5,15 @@ import { Row, Col, Image } from "antd";
 function withLayout(Component) {
   return function Layout(props) {
     return (
-      <Row align="center">
-        <Col span={12}>
-          <Image src="./assets/mentor1.jpg" preview={false} />
+      <Row>
+        <Col span={12} className="height-100">
+          <Image
+            src="./assets/mentor1.jpg"
+            preview={false}
+            style={{ height: "100vh" }}
+          />
         </Col>
-        <Col span={12}>
+        <Col span={12} className="height-100">
           <Component {...props} />
         </Col>
       </Row>
