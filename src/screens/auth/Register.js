@@ -1,15 +1,74 @@
-import { Form, Input, Button, Checkbox, Row } from "antd";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, Input, Button, Checkbox, Row, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../actions/userActions";
 import withLayout from "../../components/withLayout";
 
+const successMessage = () => {
+  message.success("This is a success message");
+};
+
+const errorMessage = (error) => {
+  message.error(`${error}`);
+};
+
+const warningMessage = () => {
+  message.warning("password mismatch");
+};
+
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [phone, setPhone] = useState("");
+  const [profile, setProfile] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      successMessage();
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      errorMessage(error.toString());
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (message) {
+      warningMessage();
+    }
+  }, [message]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage("Password mismatch");
+    } else {
+      dispatch(register(name, email, phone, profile, location, password));
+    }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  // if (message) {
+  //   warningMessage();
+  // }
+
+  // if (error) {
+  //   errorMessage();
+  // }
 
   return (
     <div className="form-container">
@@ -24,8 +83,7 @@ const Register = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={submitHandler}
         autoComplete="off"
       >
         <Form.Item
@@ -38,7 +96,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Email"
@@ -50,7 +108,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Phone"
@@ -62,7 +120,22 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          label="Location"
+          name="location"
+          rules={[
+            {
+              required: true,
+              message: "Please input your location!",
+            },
+          ]}
+        >
+          <Input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -75,7 +148,25 @@ const Register = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Confirm Password"
+          name="confirmPassword"
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}
+        >
+          <Input.Password
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -88,15 +179,14 @@ const Register = () => {
         >
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-
         <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Register
+          <Button onClick={submitHandler} type="primary" htmlType="submit">
+            {loading ? "Loading..." : "Register"}
           </Button>
         </Form.Item>
         <Form.Item
@@ -107,7 +197,7 @@ const Register = () => {
         >
           <Row>
             <p>I have an Account? </p>
-            <Link to="/register">Sign In</Link>
+            <Link to="/login">Sign In</Link>
           </Row>
         </Form.Item>
       </Form>

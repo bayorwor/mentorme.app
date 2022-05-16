@@ -1,8 +1,48 @@
-import { Form, Input, Button, Checkbox, Row } from "antd";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, Checkbox, Row, Alert, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import withLayout from "../../components/withLayout";
+import { login } from "../../actions/userActions";
+
+const successMessage = () => {
+  message.success("This is a success message");
+};
+
+const errorMessage = (error) => {
+  message.error(`${error}`);
+};
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      successMessage();
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      errorMessage(error.toString());
+    }
+  }, [error]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log({ email, password });
+    dispatch(login(email, password));
+  };
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -13,6 +53,8 @@ const Login = () => {
 
   return (
     <div className="form-container">
+      {error && <Alert.ErrorBoundary>{error}</Alert.ErrorBoundary>}
+
       <Form
         name="basic"
         labelCol={{
@@ -38,7 +80,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -51,7 +93,10 @@ const Login = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -71,8 +116,8 @@ const Login = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Login
+          <Button onClick={submitHandler} type="primary" htmlType="submit">
+            {loading ? "Loading..." : "Login"}
           </Button>
         </Form.Item>
         <Form.Item

@@ -7,14 +7,14 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.form-container {
+/* .form-container {
   display: flex;
   height: 100vh;
   flex-direction: column;
   justify-content: center;
   padding: 30px;
   align-items: center;
-}
+} */
 
 .site-layout-content {
   min-height: 280px;

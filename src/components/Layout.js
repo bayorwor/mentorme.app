@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import items from "../utils/items";
 
@@ -7,7 +7,12 @@ const { Header, Content, Footer } = Layout;
 
 const LayoutComponent = (props) => {
   return (
-    <Layout className="layout">
+    <Layout
+      style={{
+        minHeight: "95vh",
+      }}
+      className="layout"
+    >
       <Header>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           {items.map((item) => (

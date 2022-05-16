@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Avatar, Button } from "antd";
+import { Card, Button } from "antd";
 import {
   FacebookOutlined,
   TwitterOutlined,
@@ -13,6 +13,7 @@ const { Meta } = Card;
 const MentorsCard = ({ data }) => {
   return (
     <Card
+      hoverable
       style={{ width: 300 }}
       cover={<img alt="example" src={data.img} />}
       actions={[
@@ -29,7 +30,6 @@ const MentorsCard = ({ data }) => {
         description="Web Development, PHP, Databases, Freelancing, PC games, Card & board
         games"
       />
-      <h4></h4>
       <Button
         type="primary"
         shape="round"

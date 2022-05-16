@@ -1,13 +1,15 @@
 import React from "react";
-import { Card, Button } from "antd";
+import { Card } from "antd";
 
-const ServicesCard = () => {
+const ServicesCard = ({ title, description }) => {
   return (
     <div className="site-card-border-less-wrapper">
-      <Card title="Card title">
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
+      <Card
+        hoverable
+        headStyle={{ color: "#00474f", fontSize: 25 }}
+        title={title}
+      >
+        <p>{description}</p>
       </Card>
     </div>
   );
