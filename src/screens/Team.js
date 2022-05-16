@@ -15,7 +15,7 @@ const Team = () => {
         ensure that they are collectively productive and drive the company
         forward? Here are a few qualities that a successful team possesses.
       </p>
-      <Row align="center">
+      <Row gutter={[16, 16]} align="center">
         <Col span={6}>
           <TeamCard
             data={{

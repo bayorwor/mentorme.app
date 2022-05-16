@@ -9,7 +9,7 @@ const MentorsList = () => {
       <h4 className="p-3">
         Mentorship can provide numerous benefits for mentors and their mentees.
       </h4>
-      <Row align="center" data-aos="fade-up">
+      <Row gutter={[26, 26]} align="center" data-aos="fade-up">
         <Col span={6}>
           <MentorsCard
             data={{

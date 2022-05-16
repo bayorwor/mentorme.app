@@ -31,30 +31,35 @@ const ContactHeader = () => {
             </Button>
           </>
         ) : (
-          <Dropdown
-            key="2"
-            overlay={
-              <Menu>
-                <Menu.Item>
-                  <Link to="/profile">my profile</Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link to="/profile">schedules</Link>
-                </Menu.Item>
-                <Menu.Item onClick={handleLogout}>
-                  <Button type="danger" icon={<LogoutOutlined />}>
-                    Logout
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Space>
-              <Avatar src={userInfo.user.profile} />
-              {userInfo && userInfo.user.name}
-              <DownOutlined />
-            </Space>
-          </Dropdown>
+          <Space size="middle">
+            <Button type="secondary" icon={<DownOutlined />}>
+              Become A Mentor
+            </Button>
+            <Dropdown
+              key="2"
+              overlay={
+                <Menu>
+                  <Menu.Item>
+                    <Link to="/profile">my profile</Link>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <Link to="/profile">schedules</Link>
+                  </Menu.Item>
+                  <Menu.Item onClick={handleLogout}>
+                    <Button type="danger" icon={<LogoutOutlined />}>
+                      Logout
+                    </Button>
+                  </Menu.Item>
+                </Menu>
+              }
+            >
+              <Space>
+                <Avatar src={userInfo.user.profile} />
+                {userInfo && userInfo.user.name}
+                <DownOutlined />
+              </Space>
+            </Dropdown>
+          </Space>
         ),
       ]}
     />

@@ -15,7 +15,7 @@ const TeamCard = ({ data }) => {
       <Card
         hoverable
         style={{
-          width: 300,
+          // width: 300,
           margin: "auto",
           marginTop: "20px",
         }}
