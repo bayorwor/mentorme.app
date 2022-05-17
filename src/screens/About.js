@@ -77,9 +77,13 @@ const About = () => {
         </Row>
       </Col>
       <br />
-      <Col>
+      <Col
+        style={{
+          border: "1px solid steelblue",
+        }}
+      >
         <h1 className="title">Our Vision</h1>
-        <Divider />
+        {/* <Divider /> */}
         <h1 className="p-3" level={4}>
           Model and encourage a resilient mindset that values risk-taking,
           learning from failure, and personal growth.
