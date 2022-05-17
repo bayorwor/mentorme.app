@@ -13,7 +13,7 @@ function Home() {
           <Row
             style={{
               height: "50vh",
-              background: "#",
+              // background: "#041529",
               display: "flex",
               alignItems: "center",
               padding: "0px 20px",
@@ -46,7 +46,9 @@ function Home() {
             </Col>
           </Row>
         </div>
-        <div></div>
+        <div>
+          <Image src="./assets/mentor3.jpeg" />
+        </div>
       </Carousel>
       <Col>
         <MentorsList />

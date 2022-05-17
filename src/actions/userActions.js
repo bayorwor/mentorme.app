@@ -27,7 +27,7 @@ import {
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
-const baseUrl = "https://shy-gold-chicken-hose.cyclic.app";
+// const baseUrl="https://shy-gold-chicken-hose.cyclic.app"
 
 //login user actions
 export const login = (email, password) => async (dispatch) => {
@@ -43,7 +43,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${baseUrl}/api/v1/users/login`,
+      "/api/v1/users/login",
       { email, password },
       config
     );
@@ -89,7 +89,7 @@ export const register =
       };
 
       const { data } = await axios.post(
-        `${baseUrl}/api/v1/users/register`,
+        "/api/v1/users/register",
         {
           name,
           email,
