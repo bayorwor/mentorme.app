@@ -1,9 +1,23 @@
-import { PageHeader, Button, Dropdown, Menu, Space, Avatar } from "antd";
-import { LogoutOutlined, DownOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import {
+  PageHeader,
+  Button,
+  Dropdown,
+  Menu,
+  Space,
+  Avatar,
+  Divider,
+} from "antd";
+import {
+  LogoutOutlined,
+  DownOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
+import BecomeMentor from "./mentors/BecomeMentor";
 
 const ContactHeader = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -13,6 +27,12 @@ const ContactHeader = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleToggle = () => {
+    setIsModalVisible(!isModalVisible);
   };
 
   return (
@@ -32,9 +52,21 @@ const ContactHeader = () => {
           </>
         ) : (
           <Space size="middle">
-            <Button type="secondary" icon={<DownOutlined />}>
+            <Button
+              onClick={handleToggle}
+              type="dashed"
+              danger
+              ghost
+              icon={<PlusCircleOutlined />}
+            >
               Become A Mentor
             </Button>
+            {
+              <BecomeMentor
+                isModalVisible={isModalVisible}
+                handleToggle={handleToggle}
+              />
+            }
             <Dropdown
               key="2"
               overlay={
@@ -42,9 +74,11 @@ const ContactHeader = () => {
                   <Menu.Item>
                     <Link to="/profile">my profile</Link>
                   </Menu.Item>
+                  <Divider />
                   <Menu.Item>
                     <Link to="/profile">schedules</Link>
                   </Menu.Item>
+                  <Divider />
                   <Menu.Item onClick={handleLogout}>
                     <Button type="danger" icon={<LogoutOutlined />}>
                       Logout
