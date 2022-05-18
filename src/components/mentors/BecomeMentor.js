@@ -14,6 +14,7 @@ import {
 import { UploadOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { createMentor } from "../../actions/mentorActions";
+import uploadImage from "../../utils/cloudinaryUpload";
 
 const { TextArea } = Input;
 
@@ -43,9 +44,17 @@ const BecomeMentor = ({ isModalVisible, handleToggle }) => {
   const [profession, setProfession] = useState("");
   const [yearsOfExperience, setYearsOfExperience] = useState("");
   const [address, setAddress] = useState("");
-  const [profile, setProfile] = useState(
-    "https://media.istockphoto.com/photos/portrait-of-a-teenage-3d-character-picture-id1330874290?b=1&k=20&m=1330874290&s=170667a&w=0&h=bMv6ET7KluHY6DC-zcU2fjjvAfsxElq4sH5xjhSfQ1w="
-  );
+  const [profile, setProfile] = useState("");
+
+  // const handleUpload = (info) => {
+  //   if (info.file.status === "uploading") {
+  //     return;
+  //   }
+  //   if (info.file.status === "done") {
+  //     const { secure_url } = info.file.response.data;
+  //     setProfile(secure_url);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -219,9 +228,20 @@ const BecomeMentor = ({ isModalVisible, handleToggle }) => {
               <Upload
                 listType="picture-card"
                 className="avatar-uploader"
-                // showUploadList={false}
+                // action="https://api.Cloudinary.com/v1_1/mentorme/image/upload"
+                name="file"
+                customRequest={(option) => {
+                  if (option.file.status === "uploading") {
+                    return;
+                  }
+                  if (option.file.status === "done") {
+                  }
+
+                  uploadImage(option.file).then((res) => {
+                    setProfile(res);
+                  });
+                }}
                 maxCount={1}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 onPreview={onPreview}
               >
                 <Button>

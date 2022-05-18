@@ -16,15 +16,22 @@ import {
   Form,
   Spin,
   message,
+  Typography,
+  Badge,
 } from "antd";
-import { ScheduleOutlined } from "@ant-design/icons";
+import {
+  ScheduleOutlined,
+  BackwardFilled,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createMentorReview,
   listMentorDetails,
 } from "../../actions/mentorActions";
 import Loader from "../../components/Loader";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import TimeAgo from "timeago-react";
 
 const MentorDetails = () => {
   const dispatch = useDispatch();
@@ -88,69 +95,88 @@ const MentorDetails = () => {
   console.log("mentor one : ", mentor);
   return (
     <>
+      <Link to="/mentors">
+        <Button ghost icon={<BackwardFilled />} type="link">
+          Back to Mentors
+        </Button>
+      </Link>
+      <Divider />
       {mentor && (
         // <Space size="large">
-        <Row gutter={[16]}>
-          <Col span={12}>
-            <Image
-              src={mentor.profile}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "10px",
-                marginTop: "10px",
-                marginBottom: "10px",
-                marginLeft: "10px",
-                marginRight: "10px",
-              }}
-            />
+        <Row gutter={[16, 16]}>
+          <Col span={8}>
+            <Badge.Ribbon text={<Rate disabled value={mentor.rating} />}>
+              <Card
+                cover={
+                  <Image
+                    src={mentor.profile}
+                    alt="Mentor"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                }
+              />
+            </Badge.Ribbon>
           </Col>
-          <Col span={12}>
-            <h1>{mentor.name}</h1>
-            <h3 style={{ color: "blueviolet" }}>{mentor.profession}</h3>
-            <p>
-              {/* {mentor.skills.split(",").map((skill) => (
+          <Col span={8}>
+            <Typography.Title style={{ color: "darkblue" }} level={2}>
+              {mentor.name}
+            </Typography.Title>
+            <Typography.Paragraph>{mentor.address}</Typography.Paragraph>
+            <Typography.Paragraph>{mentor.email}</Typography.Paragraph>
+            <Typography.Paragraph>{mentor.phone}</Typography.Paragraph>
+            <Divider />
+
+            {mentor.skills &&
+              mentor.skills.split(",").map((skill) => (
                 <Tag color={"green"} key={skill}>
                   {skill}
                 </Tag>
-              ))} */}
-            </p>
+              ))}
             <Divider />
-            <Button type="primary" shape="round" icon={<ScheduleOutlined />}>
-              Book Session
-            </Button>
-            <Divider />
+
             {mentor.reviews.length > 0 ? (
               <List
                 itemLayout="horizontal"
                 dataSource={mentor.reviews}
                 renderItem={(item) => (
-                  <List.Item
-                    actions={[
-                      <Rate
-                        // disabled
-                        defaultValue={item.rating}
-                        // style={{ fontSize: "20px" }}
-                      />,
-                    ]}
-                  >
+                  <List.Item actions={[<TimeAgo datetime={item.createdAt} />]}>
                     <List.Item.Meta
                       avatar={<Avatar src={item.profile} />}
-                      title={<a href="#">{item.name}</a>}
-                      description={item.comment}
+                      title={
+                        <Typography.Title
+                          style={{
+                            color: "darkblue",
+                          }}
+                          level={5}
+                        >
+                          {item.name}
+                        </Typography.Title>
+                      }
+                      description={
+                        <Col>
+                          <Typography.Paragraph>
+                            {item.comment}
+                          </Typography.Paragraph>
+                          <Rate defaultValue={item.rating} />
+                        </Col>
+                      }
                     />
                   </List.Item>
                 )}
               />
             ) : (
               <Card>
-                <Alert message="No reviews yet" type="info" />
+                <Alert
+                  message="No reviews yet"
+                  description="Please be the first to review"
+                  type="info"
+                  showIcon
+                />
               </Card>
             )}
             <Divider />
             {userInfo ? (
-              <Col span={12}>
+              <Col span={24}>
                 <Form
                   style={{
                     padding: "20px",
@@ -189,6 +215,24 @@ const MentorDetails = () => {
                 showIcon={true}
               />
             )}
+          </Col>
+          <Col span={8}>
+            <Badge.Ribbon text={`${mentor.yearsOfExperience} yrs`}>
+              <Card title={mentor.name}>
+                <Typography.Title level={4} style={{ color: "blueviolet" }}>
+                  {mentor.profession}
+                </Typography.Title>
+                <Divider />
+                <Button type="danger" icon={<ScheduleOutlined />}>
+                  Book Session
+                </Button>
+                <Link to="/videochat">
+                  <Button type="primary" icon={<VideoCameraOutlined />}>
+                    Video Call
+                  </Button>
+                </Link>
+              </Card>
+            </Badge.Ribbon>
           </Col>
         </Row>
         // </Space>

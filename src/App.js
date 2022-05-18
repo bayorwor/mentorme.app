@@ -11,6 +11,7 @@ import Team from "./screens/Team";
 import MentorsList from "./screens/mentors/MentorsList";
 import ResourceList from "./screens/resources/ResourceList";
 import MentorDetails from "./screens/mentors/MentorDetails";
+import VideoChat from "./videoChat/VideoChat";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/resources" element={<ResourceList />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/videochat" element={<VideoChat />} />
           <Route path="/services" element={<Services />} />
         </Routes>
       </LayoutComponent>

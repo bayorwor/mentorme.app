@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Input, Button, Checkbox, Row, message } from "antd";
+import { Form, Input, Button, Checkbox, Row, message, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../actions/userActions";
 import withLayout from "../../components/withLayout";
+import uploadImage from "../../utils/cloudinaryUpload";
 
 const successMessage = () => {
   message.success("This is a success message");
@@ -26,6 +28,21 @@ const Register = () => {
   const [profile, setProfile] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
 
   const dispatch = useDispatch();
 
@@ -167,6 +184,40 @@ const Register = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+        </Form.Item>
+        <Form.Item
+          label="Profile Picture"
+          name="profile"
+          rules={[
+            {
+              required: true,
+              message: "Please upload your profile picture!",
+            },
+          ]}
+        >
+          <Upload
+            listType="picture-card"
+            className="avatar-uploader"
+            // action="https://api.Cloudinary.com/v1_1/mentorme/image/upload"
+            name="file"
+            customRequest={(option) => {
+              if (option.file.status === "uploading") {
+                return;
+              }
+              if (option.file.status === "done") {
+              }
+
+              uploadImage(option.file).then((res) => {
+                setProfile(res);
+              });
+            }}
+            maxCount={1}
+            onPreview={onPreview}
+          >
+            <Button>
+              <UploadOutlined />
+            </Button>
+          </Upload>
         </Form.Item>
 
         <Form.Item

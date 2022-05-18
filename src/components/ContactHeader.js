@@ -74,11 +74,11 @@ const ContactHeader = () => {
                   <Menu.Item>
                     <Link to="/profile">my profile</Link>
                   </Menu.Item>
-                  <Divider />
+                  <Menu.Divider />
                   <Menu.Item>
                     <Link to="/profile">schedules</Link>
                   </Menu.Item>
-                  <Divider />
+                  <Menu.Divider />
                   <Menu.Item onClick={handleLogout}>
                     <Button type="danger" icon={<LogoutOutlined />}>
                       Logout

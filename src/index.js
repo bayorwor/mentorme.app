@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./styles.css";
+
 import "antd/dist/antd.min.css";
 // import "./bootstrap.min.css";
 import App from "./App";
@@ -10,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ContextProvider } from "./videoChat/Context";
 
 AOS.init();
 
@@ -18,7 +21,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ContextProvider>
+          <App />
+        </ContextProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

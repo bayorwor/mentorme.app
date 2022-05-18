@@ -94,8 +94,7 @@ export const register =
           name,
           email,
           phone,
-          profile:
-            "https://images.unsplash.com/photo-1638913662295-9630035ef770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+          profile,
           location,
           password,
         },
