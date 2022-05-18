@@ -10,30 +10,30 @@ function ResourceList(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = () => {
-      setLoading(true);
-      axios({
-        method: "GET",
-        url: "https://www.googleapis.com/youtube/v3/search",
-        params: {
-          part: "snippet",
-          maxResults: "20",
-          key: apiKey,
-          // q: "traversy media",
-        },
-      })
-        .then((res) => {
-          setPosts(res.data.items);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setLoading(false);
-    };
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     setLoading(true);
+  //     axios({
+  //       method: "GET",
+  //       url: "https://www.googleapis.com/youtube/v3/search",
+  //       params: {
+  //         part: "snippet",
+  //         maxResults: "20",
+  //         key: apiKey,
+  //         // q: "traversy media",
+  //       },
+  //     })
+  //       .then((res) => {
+  //         setPosts(res.data.items);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //     setLoading(false);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   if (loading) {
     return (
@@ -45,9 +45,9 @@ function ResourceList(props) {
 
   return (
     <div>
-      {posts.map((post) => (
+      {/* {posts.map((post) => (
         <YouTube videoId={post.id.videoId} />
-      ))}
+      ))} */}
     </div>
   );
 }
