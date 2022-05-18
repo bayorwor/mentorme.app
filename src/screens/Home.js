@@ -1,11 +1,24 @@
-import { Row, Col, Image, Button, Typography, Carousel } from "antd";
-import React from "react";
+import { Row, Col, Image, Button, Typography, Carousel, Alert } from "antd";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import MentorsList from "./mentors/MentorsList";
+// import MentorsList from "./mentors/MentorsList";
+import MentorsCard from "../components/mentors/MentorsCard";
+import Loader from "../components/Loader";
+import { listTopMentors } from "../actions/mentorActions";
 
 const { Title } = Typography;
 
 function Home() {
+  const dispatch = useDispatch();
+
+  const mentorTopRated = useSelector((state) => state.mentorTopRated);
+  const { mentors, loading, error } = mentorTopRated;
+
+  useEffect(() => {
+    dispatch(listTopMentors());
+  }, [dispatch]);
+
   return (
     <div data-aos="fade-right">
       <Carousel autoplay>
@@ -51,7 +64,22 @@ function Home() {
         </div>
       </Carousel>
       <Col>
-        <MentorsList />
+        <Row gutter={[26, 26]} align="center" data-aos="fade-up">
+          <Title level={3}>Top Rated Mentors</Title>
+        </Row>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Alert message="Error" />
+        ) : (
+          <Row gutter={[26, 26]} align="center">
+            {mentors.map((mentor) => (
+              <Col key={mentor.id} span={6}>
+                <MentorsCard data={mentor} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </Col>
     </div>
   );

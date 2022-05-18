@@ -15,6 +15,13 @@ import {
   userDeleteReducer,
   userUpdateReducer,
 } from "./reducers/userReducers";
+import {
+  mentorCreateReducer,
+  mentorListReducer,
+  mentorDetailsReducer,
+  mentorReviewCreteReducer,
+  mentorTopRatedReducer,
+} from "./reducers/mentorReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -24,6 +31,11 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  mentorList: mentorListReducer,
+  mentorCreate: mentorCreateReducer,
+  mentorDetails: mentorDetailsReducer,
+  mentorReviewCreate: mentorReviewCreteReducer,
+  mentorTopRated: mentorTopRatedReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

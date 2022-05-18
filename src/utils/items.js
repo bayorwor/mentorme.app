@@ -24,6 +24,12 @@ const items = [
     href: "/mentors",
   },
   {
+    key: "9",
+    label: "Resources",
+    href: "/resources",
+    to: "/resources",
+  },
+  {
     key: "7",
     label: "About Us",
     href: "/about",
@@ -54,6 +60,7 @@ const items = [
     href: "/team",
     to: "/team",
   },
+
   {
     key: "5",
     label: "Contact Us",

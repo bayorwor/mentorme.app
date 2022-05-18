@@ -36,3 +36,11 @@
   font-weight: bold;
   text-align: center;
 }
+
+.loader {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}

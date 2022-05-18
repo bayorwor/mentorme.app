@@ -5,7 +5,12 @@ import { Row, Col, Image, Card } from "antd";
 function withLayout(Component) {
   return function Layout(props) {
     return (
-      <Card>
+      <Card
+        style={{
+          margin: "20px auto",
+          // background: "transparent",
+        }}
+      >
         <Row
           gutter={[20, 20]}
           align="center"
@@ -19,11 +24,11 @@ function withLayout(Component) {
           }}
         >
           <Col className="gutter-row">
-            <Image
+            {/* <Image
               src="./assets/mentor1.jpg"
               preview={false}
               style={{ height: "350px" }}
-            />
+            /> */}
           </Col>
           <Col span={8} className="gutter-row">
             <Component {...props} />
