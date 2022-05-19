@@ -14,20 +14,20 @@ const VideoPlayer = () => {
   return (
     <Row>
       {stream && (
-        <Card>
-          <Col span={16}>
+        <Col span={12}>
+          <Card>
             <Typography.Title level={5}>{userInfo.user.name}</Typography.Title>
             <video playsInline muted ref={myVideo} autoPlay />
-          </Col>
-        </Card>
+          </Card>
+        </Col>
       )}
       {callAccepted && !callEnded && (
-        <Card>
-          <Col span={16}>
+        <Col span={12}>
+          <Card>
             <Typography.Text>{call.name || "Name"}</Typography.Text>
             <video playsInline ref={userVideo} autoPlay />
-          </Col>
-        </Card>
+          </Card>
+        </Col>
       )}
     </Row>
   );

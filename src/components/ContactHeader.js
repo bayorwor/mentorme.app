@@ -12,6 +12,7 @@ import {
   LogoutOutlined,
   DownOutlined,
   PlusCircleOutlined,
+  ScheduleOutlined,
 } from "@ant-design/icons";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -52,6 +53,14 @@ const ContactHeader = () => {
           </>
         ) : (
           <Space size="middle">
+            <Button
+              onClick={handleToggle}
+              type="primary"
+              ghost
+              icon={<ScheduleOutlined />}
+            >
+              My Schedules
+            </Button>
             <Button
               onClick={handleToggle}
               type="dashed"

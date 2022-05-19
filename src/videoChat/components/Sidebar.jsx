@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Row, Typography, Input, Col, Divider, Form } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { PhoneOutlined, PhoneFilled, CopyOutlined } from "@ant-design/icons";
@@ -14,6 +14,10 @@ const Sidebar = ({ children }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  useEffect(() => {
+    setName(userInfo.user.name);
+  }, []);
+
   return (
     <div>
       <Form>
@@ -22,8 +26,8 @@ const Sidebar = ({ children }) => {
             <Typography.Title level={5}>Account Info</Typography.Title>
             <Input
               placeholder="Enter your Name"
-              value={name || userInfo.user.name}
-              onChange={(e) => setName(e.target.value || userInfo.user.name)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <CopyToClipboard text={me}>
               <Button type="primary" icon={<CopyOutlined />}>
