@@ -5,8 +5,11 @@ import { PhoneOutlined, PhoneFilled, CopyOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 
 import { SocketContext } from "../Context";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
+  const navigate = useNavigate();
+
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } =
     useContext(SocketContext);
   const [idToCall, setIdToCall] = useState("");
@@ -15,8 +18,12 @@ const Sidebar = ({ children }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    setName(userInfo.user.name);
-  }, []);
+    if (userInfo && userInfo.token) {
+      setName(userInfo.user.name);
+    } else {
+      navigate("/login");
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div>
