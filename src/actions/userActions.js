@@ -43,7 +43,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://mentorme-api.herokuapp.com/api/v1/users/login",
+      "https://shy-gold-chicken-hose.cyclic.app/api/v1/users/login",
       { email, password },
       config
     );
@@ -89,7 +89,7 @@ export const register =
       };
 
       const { data } = await axios.post(
-        "https://mentorme-api.herokuapp.com/api/v1/users/register",
+        "https://shy-gold-chicken-hose.cyclic.app/api/v1/users/register",
         {
           name,
           email,

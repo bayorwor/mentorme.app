@@ -30,7 +30,7 @@ export const listMentors =
       dispatch({ type: MENTOR_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `https://mentorme-api.herokuapp.com/api/v1/mentors?keyword=${keyword}`
+        `https://shy-gold-chicken-hose.cyclic.app/api/v1/mentors?keyword=${keyword}`
       );
 
       dispatch({ type: MENTOR_LIST_SUCCESS, payload: data.data });
@@ -50,7 +50,7 @@ export const listMentorDetails = (id) => async (dispatch) => {
     dispatch({ type: MENTOR_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `https://mentorme-api.herokuapp.com/api/v1/mentors/${id}`
+      `https://shy-gold-chicken-hose.cyclic.app/api/v1/mentors/${id}`
     );
 
     dispatch({ type: MENTOR_DETAILS_SUCCESS, payload: data.data });
@@ -112,7 +112,7 @@ export const createMentor = (mentor) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://mentorme-api.herokuapp.com/api/v1/mentors`,
+      `https://shy-gold-chicken-hose.cyclic.app/api/v1/mentors`,
       mentor,
       config
     );
@@ -183,7 +183,7 @@ export const createMentorReview =
       };
 
       await axios.post(
-        `https://mentorme-api.herokuapp.com/api/v1/mentors/${mentorId}/reviews`,
+        `https://shy-gold-chicken-hose.cyclic.app/api/v1/mentors/${mentorId}/reviews`,
         review,
         config
       );
@@ -205,7 +205,7 @@ export const listTopMentors = () => async (dispatch) => {
     dispatch({ type: MENTOR_TOP_REQUEST });
 
     const { data } = await axios.get(
-      `https://mentorme-api.herokuapp.com/api/v1/mentors/top`
+      `https://shy-gold-chicken-hose.cyclic.app/api/v1/mentors/top`
     );
 
     dispatch({ type: MENTOR_TOP_SUCCESS, payload: data.data });
