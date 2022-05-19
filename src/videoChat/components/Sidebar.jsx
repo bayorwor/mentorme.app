@@ -18,12 +18,12 @@ const Sidebar = ({ children }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.token) {
+    if (userInfo) {
       setName(userInfo.user.name);
     } else {
       navigate("/login");
     }
-  }, [userInfo, navigate]);
+  }, [userInfo, navigate, setName]);
 
   return (
     <div>

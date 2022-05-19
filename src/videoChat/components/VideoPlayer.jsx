@@ -1,22 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Row, Typography, Card, Col } from "antd";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { SocketContext } from "../Context";
 
 const VideoPlayer = () => {
+  const navigate = useNavigate();
+
   const { callAccepted, myVideo, userVideo, callEnded, stream, call } =
     useContext(SocketContext);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo, navigate]);
+
   return (
     <Row>
       {stream && (
         <Col span={12}>
           <Card>
-            <Typography.Title level={5}>{userInfo.user.name}</Typography.Title>
+            <Typography.Title level={5}>
+              {userInfo && userInfo.user.name}
+            </Typography.Title>
             <video playsInline muted ref={myVideo} autoPlay />
           </Card>
         </Col>

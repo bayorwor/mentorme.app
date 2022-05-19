@@ -13,7 +13,7 @@ const VideoChat = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.token) {
+    if (!userInfo) {
       navigate("/login");
     }
   }, [userInfo, navigate]);
