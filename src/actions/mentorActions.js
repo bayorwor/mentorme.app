@@ -29,7 +29,9 @@ export const listMentors =
     try {
       dispatch({ type: MENTOR_LIST_REQUEST });
 
-      const { data } = await axios.get(`/api/v1/mentors?keyword=${keyword}`);
+      const { data } = await axios.get(
+        `https://mentorme-api.herokuapp.com/api/v1/mentors?keyword=${keyword}`
+      );
 
       dispatch({ type: MENTOR_LIST_SUCCESS, payload: data.data });
     } catch (error) {
@@ -47,7 +49,9 @@ export const listMentorDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: MENTOR_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/mentors/${id}`);
+    const { data } = await axios.get(
+      `https://mentorme-api.herokuapp.com/api/v1/mentors/${id}`
+    );
 
     dispatch({ type: MENTOR_DETAILS_SUCCESS, payload: data.data });
   } catch (error) {
@@ -107,7 +111,11 @@ export const createMentor = (mentor) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/v1/mentors`, mentor, config);
+    const { data } = await axios.post(
+      `https://mentorme-api.herokuapp.com/api/v1/mentors`,
+      mentor,
+      config
+    );
 
     dispatch({ type: MENTOR_CREATE_SUCCESS, payload: data });
   } catch (error) {
@@ -174,7 +182,11 @@ export const createMentorReview =
         },
       };
 
-      await axios.post(`/api/v1/mentors/${mentorId}/reviews`, review, config);
+      await axios.post(
+        `https://mentorme-api.herokuapp.com/api/v1/mentors/${mentorId}/reviews`,
+        review,
+        config
+      );
 
       dispatch({ type: MENTOR_CREATE_REVIEW_SUCCESS });
     } catch (error) {
@@ -192,7 +204,9 @@ export const listTopMentors = () => async (dispatch) => {
   try {
     dispatch({ type: MENTOR_TOP_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/mentors/top`);
+    const { data } = await axios.get(
+      `https://mentorme-api.herokuapp.com/api/v1/mentors/top`
+    );
 
     dispatch({ type: MENTOR_TOP_SUCCESS, payload: data.data });
   } catch (error) {
