@@ -25,7 +25,7 @@ function Home() {
         <div>
           <Row
             style={{
-              height: "50vh",
+              height: "40vh",
               // background: "#041529",
               display: "flex",
               alignItems: "center",
@@ -35,13 +35,10 @@ function Home() {
           >
             <Col span={12}>
               <Title type="danger">Welcome to MentorMe</Title>
-              <Title level={4}>
+              <Title level={3}>
                 Mentorship can provide numerous benefits for mentors and their
                 mentees. Developing this relationship can help both of you learn
                 new things, build your networks and grow as professionals.
-                Understanding these benefits can help you decide whether to find
-                a mentor or become one. In this article, we discuss why a mentor
-                is important, along with several reasons to become a mentor.
               </Title>
               <br />
               <br />
@@ -60,12 +57,14 @@ function Home() {
           </Row>
         </div>
         <div>
-          <Image src="./assets/mentor3.jpeg" />
+          <Image src="./assets/mentor3.jpeg" height={"40vh"} width={"100%"} />
         </div>
       </Carousel>
       <Col>
         <Row gutter={[26, 26]} align="center" data-aos="fade-up">
-          <Title level={3}>Top Rated Mentors</Title>
+          <Title style={{ margin: 40 }} type="warning" level={2}>
+            Top Rated Mentors
+          </Title>
         </Row>
         {loading ? (
           <Loader />

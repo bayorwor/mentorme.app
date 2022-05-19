@@ -19,8 +19,8 @@ const Team = () => {
         <Col span={6}>
           <TeamCard
             data={{
-              name: "John Doe",
-              description: "Cheif Executive Officer",
+              name: "Abudu Bayorwor",
+              description: "Frontend Developer",
               img: "./assets/teams/abudu.jpg",
             }}
           />
@@ -28,27 +28,27 @@ const Team = () => {
         <Col span={6}>
           <TeamCard
             data={{
-              name: "John Doe",
-              description: "Cheif Executive Officer",
-              img: "./assets/teams/abudu.jpg",
+              name: "Yelfaari Francis",
+              description: "Backeend Developer",
+              img: "./assets/teams/francis.jpeg",
             }}
           />
         </Col>
         <Col span={6}>
           <TeamCard
             data={{
-              name: "John Doe",
-              description: "Cheif Executive Officer",
-              img: "./assets/teams/abudu.jpg",
+              name: "Christaina Sunbabaara",
+              description: "Technical Associate",
+              img: "./assets/teams/christiana.png",
             }}
           />
         </Col>
         <Col span={6}>
           <TeamCard
             data={{
-              name: "John Doe",
-              description: "Cheif Executive Officer",
-              img: "./assets/teams/abudu.jpg",
+              name: "Iddrisu Hidaya",
+              description: "Community Lead",
+              img: "./assets/teams/hidaya.png",
             }}
           />
         </Col>

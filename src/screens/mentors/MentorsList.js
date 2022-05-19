@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MentorsCard from "../../components/mentors/MentorsCard";
-import { Alert, Col, Row } from "antd";
+import { Alert, Col, Row, Typography } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { listMentors } from "../../actions/mentorActions";
 import Loader from "../../components/Loader";
@@ -21,10 +21,12 @@ const MentorsList = () => {
 
   return (
     <div>
-      <h1 className="title">Our List of Mentors</h1>
-      <h4 className="p-3">
+      <Typography.Title level={2} className="title">
+        Our List of Mentors
+      </Typography.Title>
+      <Typography.Title level={4} className="p-3">
         Mentorship can provide numerous benefits for mentors and their mentees.
-      </h4>
+      </Typography.Title>
       <Row gutter={[26, 26]} align="center" data-aos="fade-up">
         {mentors.length <= 0 && (
           <Alert

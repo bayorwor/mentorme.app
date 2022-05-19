@@ -7,7 +7,6 @@ import {
   Col,
   Image,
   Alert,
-  Space,
   Tag,
   List,
   Avatar,
@@ -31,7 +30,7 @@ import {
 } from "../../actions/mentorActions";
 import Loader from "../../components/Loader";
 import { Link, useParams } from "react-router-dom";
-import TimeAgo from "timeago-react";
+import moment from "moment";
 
 const MentorDetails = () => {
   const dispatch = useDispatch();
@@ -104,119 +103,143 @@ const MentorDetails = () => {
       {mentor && (
         // <Space size="large">
         <Row gutter={[16, 16]}>
-          <Col span={8}>
-            <Badge.Ribbon text={<Rate disabled value={mentor.rating} />}>
-              <Card
-                cover={
-                  <Image
-                    src={mentor.profile}
-                    alt="Mentor"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                }
-              />
-            </Badge.Ribbon>
-          </Col>
-          <Col span={8}>
-            <Typography.Title style={{ color: "darkblue" }} level={2}>
-              {mentor.name}
-            </Typography.Title>
-            <Typography.Paragraph>{mentor.address}</Typography.Paragraph>
-            <Typography.Paragraph>{mentor.email}</Typography.Paragraph>
-            <Typography.Paragraph>{mentor.phone}</Typography.Paragraph>
-            <Divider />
-
-            {mentor.skills &&
-              mentor.skills.split(",").map((skill) => (
-                <Tag color={"green"} key={skill}>
-                  {skill}
-                </Tag>
-              ))}
-            <Divider />
-
-            {mentor.reviews.length > 0 ? (
-              <List
-                itemLayout="horizontal"
-                dataSource={mentor.reviews}
-                renderItem={(item) => (
-                  <List.Item actions={[<TimeAgo datetime={item.createdAt} />]}>
-                    <List.Item.Meta
-                      avatar={<Avatar src={item.profile} />}
-                      title={
-                        <Typography.Title
-                          style={{
-                            color: "darkblue",
-                          }}
-                          level={5}
-                        >
-                          {item.name}
-                        </Typography.Title>
-                      }
-                      description={
-                        <Col>
-                          <Typography.Paragraph>
-                            {item.comment}
-                          </Typography.Paragraph>
-                          <Rate defaultValue={item.rating} />
-                        </Col>
-                      }
+          <Col data-aos="zoom-out" span={8}>
+            <Card>
+              <Badge.Ribbon
+                style={{ background: "teal" }}
+                text={<Rate disabled value={mentor.rating} />}
+              >
+                <Card
+                  cover={
+                    <Image
+                      src={mentor.profile}
+                      alt="Mentor"
+                      style={{ width: "100%", height: "100%" }}
                     />
-                  </List.Item>
-                )}
-              />
-            ) : (
-              <Card>
-                <Alert
-                  message="No reviews yet"
-                  description="Please be the first to review"
-                  type="info"
-                  showIcon
+                  }
                 />
-              </Card>
-            )}
-            <Divider />
-            {userInfo ? (
-              <Col span={24}>
-                <Form
-                  style={{
-                    padding: "20px",
-                    border: "1px solid #d9d9d9",
-                    borderRadius: "4px",
-                    backgroundColor: "#fff",
-                    boxShadow: "0 1px 3px rgba(26,26,26,.1)",
-                  }}
-                >
-                  <Rate
-                    allowHalf
-                    defaultValue={2.5}
-                    value={rating}
-                    onChange={(value) => setRating(value)}
-                  />
-                  <Input.TextArea
-                    placeholder="Leave a comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                  />
-                  <Divider />
-                  <Button
-                    onClick={submitHandler}
-                    type="primary"
-                    htmlType="submit"
-                  >
-                    {reviewLoading ? <Spin /> : "Submit"}
-                  </Button>
-                </Form>
-              </Col>
-            ) : (
-              <Alert
-                message="Error"
-                description="You need to login to see this page"
-                type="error"
-                showIcon={true}
-              />
-            )}
+              </Badge.Ribbon>
+            </Card>
           </Col>
-          <Col span={8}>
+          <Col data-aos="fade-up" span={8}>
+            <Card>
+              <Typography.Title style={{ color: "darkblue" }} level={2}>
+                {mentor.name}
+              </Typography.Title>
+              <Typography.Paragraph>{mentor.address}</Typography.Paragraph>
+              <Typography.Paragraph>{mentor.email}</Typography.Paragraph>
+              <Typography.Paragraph>{mentor.phone}</Typography.Paragraph>
+              <Divider />
+
+              {mentor.skills &&
+                mentor.skills.split(",").map((skill) => (
+                  <Tag color={"green"} key={skill}>
+                    {skill}
+                  </Tag>
+                ))}
+              <Divider />
+
+              {mentor.reviews.length > 0 ? (
+                <List
+                  itemLayout="horizontal"
+                  dataSource={mentor.reviews}
+                  renderItem={(item) => (
+                    <List.Item
+                      actions={[
+                        <Typography.Text>
+                          {moment(item.createdAt).fromNow()}
+                        </Typography.Text>,
+                      ]}
+                    >
+                      <List.Item.Meta
+                        avatar={<Avatar src={item.profile} />}
+                        title={
+                          <Typography.Title
+                            style={{
+                              color: "darkblue",
+                            }}
+                            level={5}
+                          >
+                            {item.name}
+                          </Typography.Title>
+                        }
+                        description={
+                          <Col>
+                            <Typography.Paragraph>
+                              {item.comment}
+                            </Typography.Paragraph>
+                            <Rate defaultValue={item.rating} />
+                          </Col>
+                        }
+                      />
+                    </List.Item>
+                  )}
+                />
+              ) : (
+                <Card>
+                  <Alert
+                    message="No reviews yet"
+                    description="Please be the first to review"
+                    type="info"
+                    showIcon
+                  />
+                </Card>
+              )}
+              <Divider />
+              {userInfo ? (
+                <Col span={24}>
+                  <Form
+                    style={{
+                      padding: "20px",
+                      border: "1px solid #d9d9d9",
+                      borderRadius: "4px",
+                      backgroundColor: "#fff",
+                      boxShadow: "0 1px 3px rgba(26,26,26,.1)",
+                    }}
+                  >
+                    <Rate
+                      allowHalf
+                      defaultValue={2.5}
+                      value={rating}
+                      onChange={(value) => setRating(value)}
+                    />
+                    <Input.TextArea
+                      placeholder="Leave a comment"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    />
+                    <Divider />
+                    <Button
+                      onClick={submitHandler}
+                      type="primary"
+                      htmlType="submit"
+                    >
+                      {reviewLoading ? <Spin /> : "Submit"}
+                    </Button>
+                  </Form>
+                </Col>
+              ) : (
+                <Alert
+                  message="Error"
+                  description={
+                    <Row>
+                      <Typography.Link>
+                        You need to login to see this page
+                      </Typography.Link>
+                      <Link to="/login">
+                        <Button type="link" danger>
+                          login
+                        </Button>
+                      </Link>
+                    </Row>
+                  }
+                  type="error"
+                  showIcon={true}
+                />
+              )}
+            </Card>
+          </Col>
+          <Col data-aos="fade-right" span={8}>
             <Badge.Ribbon text={`${mentor.yearsOfExperience} yrs`}>
               <Card title={mentor.name}>
                 <Typography.Title level={4} style={{ color: "blueviolet" }}>

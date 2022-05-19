@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Spin } from "antd";
+import { Card, Spin, Typography } from "antd";
 import { apiKey } from "../../constants/apKey";
 import YouTube from "react-youtube";
 
@@ -45,8 +45,12 @@ function ResourceList(props) {
 
   return (
     <div>
+      <Typography.Title level={2} className="title">
+        Our List of Resources
+      </Typography.Title>
+
       {/* {posts.map((post) => (
-        <YouTube videoId={post.id.videoId} />
+        <YouTube videoId={post.id.videoId}  />
       ))} */}
     </div>
   );
