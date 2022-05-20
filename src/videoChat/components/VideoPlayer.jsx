@@ -8,7 +8,7 @@ import { SocketContext } from "../Context";
 const VideoPlayer = () => {
   const navigate = useNavigate();
 
-  const { callAccepted, myVideo, userVideo, callEnded, stream, call } =
+  const { callAccepted, myVideo, name, userVideo, callEnded, stream, call } =
     useContext(SocketContext);
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -25,9 +25,7 @@ const VideoPlayer = () => {
       {stream && (
         <Col span={12}>
           <Card>
-            <Typography.Title level={5}>
-              {userInfo && userInfo.user.name}
-            </Typography.Title>
+            <Typography.Title level={5}>{name}</Typography.Title>
             <video playsInline muted ref={myVideo} autoPlay />
           </Card>
         </Col>
