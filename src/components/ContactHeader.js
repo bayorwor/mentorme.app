@@ -70,11 +70,11 @@ const ContactHeader = () => {
               overlay={
                 <Menu>
                   <Menu.Item>
-                    <Link to="/profile">my profile</Link>
+                    <Link to="/mentorbookings">my profile</Link>
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item>
-                    <Link to="/mybookings">schedules</Link>
+                    <Link to="/mybookings">schedules with me</Link>
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item onClick={handleLogout}>

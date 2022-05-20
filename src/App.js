@@ -13,6 +13,7 @@ import ResourceList from "./screens/resources/ResourceList";
 import MentorDetails from "./screens/mentors/MentorDetails";
 import VideoChat from "./videoChat/VideoChat";
 import MyBookings from "./screens/bookings/MyBookings";
+import MentorBookings from "./screens/mentors/MentorBookings";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/videochat" element={<VideoChat />} />
           <Route path="/services" element={<Services />} />
           <Route path="/mybookings" element={<MyBookings />} />
+          <Route path="/mentorbookings" element={<MentorBookings />} />
         </Routes>
       </LayoutComponent>
     </>
