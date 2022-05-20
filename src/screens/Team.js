@@ -39,7 +39,7 @@ const Team = () => {
             data={{
               name: "Christaina Sunbabaara",
               description: "Technical Associate",
-              img: "./assets/teams/christiana.png",
+              img: "./assets/teams/tiana.jpeg",
             }}
           />
         </Col>

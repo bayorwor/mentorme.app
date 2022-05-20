@@ -18,11 +18,7 @@ import {
   Typography,
   Badge,
 } from "antd";
-import {
-  ScheduleOutlined,
-  BackwardFilled,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { ScheduleOutlined, BackwardFilled } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createMentorReview,
@@ -31,6 +27,7 @@ import {
 import Loader from "../../components/Loader";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
+import BookMentor from "../bookings/BookMentor";
 
 const MentorDetails = () => {
   const dispatch = useDispatch();
@@ -39,6 +36,12 @@ const MentorDetails = () => {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleToggle = () => {
+    setIsModalVisible(!isModalVisible);
+  };
 
   const mentorDetails = useSelector((state) => state.mentorDetails);
   const { loading, error, mentor } = mentorDetails;
@@ -220,7 +223,7 @@ const MentorDetails = () => {
                 </Col>
               ) : (
                 <Alert
-                  message="Error"
+                  message="Not logged in"
                   description={
                     <Row>
                       <Typography.Link>
@@ -233,7 +236,7 @@ const MentorDetails = () => {
                       </Link>
                     </Row>
                   }
-                  type="error"
+                  type="warning"
                   showIcon={true}
                 />
               )}
@@ -246,20 +249,44 @@ const MentorDetails = () => {
                   {mentor.profession}
                 </Typography.Title>
                 <Divider />
-                <Button type="danger" icon={<ScheduleOutlined />}>
-                  Book Session
-                </Button>
-                <Link to="/videochat">
-                  <Button type="primary" icon={<VideoCameraOutlined />}>
-                    Video Call
+                {userInfo ? (
+                  <Button
+                    onClick={handleToggle}
+                    type="danger"
+                    icon={<ScheduleOutlined />}
+                  >
+                    Book Session
                   </Button>
-                </Link>
+                ) : (
+                  <Alert
+                    message="Note"
+                    description={
+                      <Row>
+                        <Typography.Link>
+                          You need to login to see this page
+                        </Typography.Link>
+                        <Link to="/login">
+                          <Button type="link" danger>
+                            login
+                          </Button>
+                        </Link>
+                      </Row>
+                    }
+                    type="warning"
+                    showIcon={true}
+                  />
+                )}
               </Card>
             </Badge.Ribbon>
           </Col>
         </Row>
         // </Space>
       )}
+      <BookMentor
+        isModalVisible={isModalVisible}
+        id={id}
+        handleToggle={handleToggle}
+      />
     </>
   );
 };

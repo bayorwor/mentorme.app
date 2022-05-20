@@ -23,12 +23,12 @@ const items = [
     label: "Find Mentors",
     href: "/mentors",
   },
-  {
-    key: "9",
-    label: "Resources",
-    href: "/resources",
-    to: "/resources",
-  },
+  // {
+  //   key: "9",
+  //   label: "Resources",
+  //   href: "/resources",
+  //   to: "/resources",
+  // },
   {
     key: "7",
     label: "About Us",

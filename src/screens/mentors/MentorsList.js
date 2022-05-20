@@ -21,6 +21,9 @@ const MentorsList = () => {
 
   return (
     <div>
+      {error && (
+        <Alert message="Error" description={error} type="error" showIcon />
+      )}
       <Typography.Title level={2} className="title">
         Our List of Mentors
       </Typography.Title>

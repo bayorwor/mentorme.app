@@ -22,6 +22,7 @@ import {
   mentorReviewCreteReducer,
   mentorTopRatedReducer,
 } from "./reducers/mentorReducers";
+import { bookCreateReducer, bookListMyReducer } from "./reducers/bookReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -36,6 +37,8 @@ const reducer = combineReducers({
   mentorDetails: mentorDetailsReducer,
   mentorReviewCreate: mentorReviewCreteReducer,
   mentorTopRated: mentorTopRatedReducer,
+  bookCreate: bookCreateReducer,
+  bookListMy: bookListMyReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

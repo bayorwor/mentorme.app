@@ -45,14 +45,11 @@ const ContactHeader = () => {
           </>
         ) : (
           <Space size="middle">
-            <Button
-              onClick={handleToggle}
-              type="primary"
-              ghost
-              icon={<ScheduleOutlined />}
-            >
-              My Schedules
-            </Button>
+            <Link to="/mybookings">
+              <Button type="link" ghost icon={<ScheduleOutlined />}>
+                My Schedules
+              </Button>
+            </Link>
             <Button
               onClick={handleToggle}
               type="dashed"
@@ -77,7 +74,7 @@ const ContactHeader = () => {
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item>
-                    <Link to="/profile">schedules</Link>
+                    <Link to="/mybookings">schedules</Link>
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item onClick={handleLogout}>

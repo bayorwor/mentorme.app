@@ -1,29 +1,26 @@
 import axios from "axios";
 import {
-  ORDER_CREATE_REQUEST,
-  ORDER_CREATE_SUCCESS,
-  ORDER_CREATE_FAIL,
-  ORDER_DETAILS_REQUEST,
-  ORDER_DETAILS_SUCCESS,
-  ORDER_DETAILS_FAIL,
-  ORDER_PAY_REQUEST,
-  ORDER_PAY_SUCCESS,
-  ORDER_PAY_FAIL,
-  ORDER_LIST_MY_REQUEST,
-  ORDER_LIST_MY_SUCCESS,
-  ORDER_LIST_MY_FAIL,
-  ORDER_LIST_REQUEST,
-  ORDER_LIST_SUCCESS,
-  ORDER_LIST_FAIL,
-  ORDER_DELIVER_FAIL,
-  ORDER_DELIVER_REQUEST,
-  ORDER_DELIVER_SUCCESS,
-} from "../constants/orderConstants";
+  BOOK_CREATE_REQUEST,
+  BOOK_CREATE_SUCCESS,
+  BOOK_CREATE_FAIL,
+  BOOK_DETAILS_REQUEST,
+  BOOK_DETAILS_SUCCESS,
+  BOOK_DETAILS_FAIL,
+  BOOK_LIST_MY_REQUEST,
+  BOOK_LIST_MY_SUCCESS,
+  BOOK_LIST_MY_FAIL,
+  BOOK_LIST_REQUEST,
+  BOOK_LIST_SUCCESS,
+  BOOK_LIST_FAIL,
+  BOOK_DELIVER_FAIL,
+  BOOK_DELIVER_REQUEST,
+  BOOK_DELIVER_SUCCESS,
+} from "../constants/bookConstants";
 
-export const createOrder = (order) => async (dispatch, getState) => {
+export const createBook = (book) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_CREATE_REQUEST,
+      type: BOOK_CREATE_REQUEST,
     });
 
     const {
@@ -37,15 +34,19 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/orders`, order, config);
+    const { data } = await axios.post(
+      `https://shy-gold-chicken-hose.cyclic.app/api/v1/bookings`,
+      book,
+      config
+    );
 
     dispatch({
-      type: ORDER_CREATE_SUCCESS,
+      type: BOOK_CREATE_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_CREATE_FAIL,
+      type: BOOK_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -57,7 +58,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_DETAILS_REQUEST,
+      type: BOOK_DETAILS_REQUEST,
     });
 
     const {
@@ -73,53 +74,12 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders/${id}`, config);
 
     dispatch({
-      type: ORDER_DETAILS_SUCCESS,
+      type: BOOK_DETAILS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-
-export const payOrder = (orderId, paymentResult) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: ORDER_PAY_REQUEST,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.put(
-      `/api/orders/${orderId}/pay`,
-      paymentResult,
-      config
-    );
-
-    dispatch({
-      type: ORDER_PAY_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: ORDER_PAY_FAIL,
+      type: BOOK_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -131,7 +91,7 @@ export const payOrder = (orderId, paymentResult) => async (
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_DELIVER_REQUEST,
+      type: BOOK_DELIVER_REQUEST,
     });
 
     const {
@@ -151,12 +111,12 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: ORDER_DELIVER_SUCCESS,
+      type: BOOK_DELIVER_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_DELIVER_FAIL,
+      type: BOOK_DELIVER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -165,10 +125,10 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
   }
 };
 
-export const listMyOrder = () => async (dispatch, getState) => {
+export const listMyBookings = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_LIST_MY_REQUEST,
+      type: BOOK_LIST_MY_REQUEST,
     });
 
     const {
@@ -181,15 +141,20 @@ export const listMyOrder = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    const { data } = await axios.get(
+      `https://shy-gold-chicken-hose.cyclic.app/api/v1/bookings/me`,
+      config
+    );
+
+    console.log(data);
 
     dispatch({
-      type: ORDER_LIST_MY_SUCCESS,
-      payload: data,
+      type: BOOK_LIST_MY_SUCCESS,
+      payload: data.data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_LIST_MY_FAIL,
+      type: BOOK_LIST_MY_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -200,7 +165,7 @@ export const listMyOrder = () => async (dispatch, getState) => {
 export const listOrders = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ORDER_LIST_REQUEST,
+      type: BOOK_LIST_REQUEST,
     });
 
     const {
@@ -216,12 +181,12 @@ export const listOrders = () => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders`, config);
 
     dispatch({
-      type: ORDER_LIST_SUCCESS,
-      payload: data,
+      type: BOOK_LIST_SUCCESS,
+      payload: data.data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_LIST_FAIL,
+      type: BOOK_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
