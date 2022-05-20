@@ -8,12 +8,14 @@ const SocketContext = createContext();
 const socket = io("https://mentorme-api.herokuapp.com");
 
 const ContextProvider = ({ children }) => {
+  const generatePeerID = Math.random().toString(36).substring(7);
+
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
   const [stream, setStream] = useState();
   const [name, setName] = useState("");
   const [call, setCall] = useState({});
-  const [me, setMe] = useState("");
+  const [me, setMe] = useState(generatePeerID);
 
   const myVideo = useRef();
   const userVideo = useRef();

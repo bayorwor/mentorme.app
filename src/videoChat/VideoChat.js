@@ -5,6 +5,7 @@ import Notifications from "./components/Notifications";
 import { Row } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ContextProvider } from "./Context";
 
 const VideoChat = () => {
   const navigate = useNavigate();
@@ -19,12 +20,14 @@ const VideoChat = () => {
   }, [userInfo, navigate]);
 
   return (
-    <Row>
-      <VideoPlayer />
-      <Sidebar>
-        <Notifications />
-      </Sidebar>
-    </Row>
+    <ContextProvider>
+      <Row>
+        <VideoPlayer />
+        <Sidebar>
+          <Notifications />
+        </Sidebar>
+      </Row>
+    </ContextProvider>
   );
 };
 
